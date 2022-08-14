@@ -1,7 +1,10 @@
-import { createClient } from "edgedb";
+import e from "../dbschema/edgeql-js";
 
-export const client = createClient();
+export const getArchiveQuery = (id: string) => {
+    return e.select(e.GtfsArchive, (archive) => {
+        return { filter: e.op(archive.id, "=", e.uuid(id)) };
+    });
+};
 
-export { default as e } from "../dbschema/edgeql-js";
-export type { types } from "../dbschema/edgeql-js";
-export type { GtfsLoader } from "./load";
+// Uncomment this line to break TS:
+// type ArchiveQuery = ReturnType<typeof getArchiveQuery>;
