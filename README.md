@@ -35,3 +35,5 @@ I am using:
 - **macOS** 12.3.1
 - **Node** 16.6.0
 - **TypeScript** 4.7.4
+- **edgedb CLI** 2.0.4+a7fc49b
+- **edgedb npm package** 0.21.3
