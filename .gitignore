@@ -1,0 +1,5 @@
+dbschema/edgeql-js/
+dist/
+node_modules/
+.vscode/
+.DS_Store
