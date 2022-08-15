@@ -19,7 +19,7 @@ type IngestArgs<T extends Ingestable> = Parameters<typeof e.insert<T>>[1];
 
 export const ingestMany = async <T extends Ingestable>(
     type: T,
-    items: Record<string, string>[],
+    items: Record<string, any>[],
     cast: (item: $expr_ForVar<$json>) => IngestArgs<T>
 ) => {
     const query = e.params({ items: e.json }, (params) => {

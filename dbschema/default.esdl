@@ -75,13 +75,13 @@ module default {
     }
 
     type BelongsToArchive {
-        required link archive -> GtfsArchive;
+        required link archive -> GtfsArchive {
+            on target delete delete source;
+        }
     }
 
     type Route extending BelongsToArchive {
-        multi link route_patterns -> RoutePattern {
-            on source delete delete target;
-        }
+        multi link route_patterns -> RoutePattern;
         required property route -> str;
         required property agency_id -> str;
         required property route_type -> RouteType;
@@ -152,12 +152,8 @@ module default {
     }
 
     type StopTime extending BelongsToArchive {
-        required link trip -> Trip {
-            on target delete delete source;
-        }
-        required link stop -> Stop {
-            on target delete delete source;
-        }
+        required link trip -> Trip;
+        required link stop -> Stop;
         required property arrival_time -> cal::local_time;
         required property departure_time -> cal::local_time;
         property stop_sequence -> str;
@@ -199,17 +195,16 @@ module default {
         required property schedule_typicality -> ScheduleTypicality;
         required property start_date -> cal::local_date;
         required property end_date -> cal::local_date;
-        required property rating_start_date -> cal::local_date;
-        required property rating_end_date -> cal::local_date;
-        required property rating_description -> str;
         required property service_days -> tuple<bool, bool, bool, bool, bool, bool, bool>;
-        multi link calendar_dates -> CalendarDate {
-            on source delete delete target;
-        }
+        multi link calendar_dates -> CalendarDate;
+        property rating_start_date -> cal::local_date;
+        property rating_end_date -> cal::local_date;
+        property rating_description -> str;
     }
 
     type CalendarDate extending BelongsToArchive {
         required property date -> cal::local_date;
+        required property service_id -> str;
         required property exception_type -> ServiceExceptionType;
     }
 }
